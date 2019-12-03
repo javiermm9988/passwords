@@ -15,6 +15,13 @@ class UserController extends Controller
         $data = ['email' => $request->email];
 
         $user = user::where($data)->first();
+
+        if ($user == NULL) 
+        {
+            return response()->json([
+                'message' => 'unauthorized'
+            ], 401);  
+        }
                                 
         if ($user->password == $request->password)
         {
