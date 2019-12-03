@@ -10,7 +10,6 @@ use Firebase\JWT\JWT;
 
 class CategoryController extends Controller
 {
-  
     /**
      * Display a listing of the resource.
      *
