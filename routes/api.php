@@ -20,15 +20,16 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('Login', 'UserController@login');
 
-Route::post('Create_User', 'UserController@store');
+Route::post('Register', 'UserController@store');
 
 Route::middleware(['Checkout'])->group(function(){
 
     Route::apiResource('Category', 'CategoryController');
+    Route::get('Show_Category', 'CategoryController@show_categories');
 
     Route::apiResource('Password', 'PasswordController');
+    Route::get('Show_Password', 'PasswordController@show_passwords');
 
     Route::apiResource('User', 'UserController');
-
 
 });
