@@ -40,7 +40,7 @@ class PasswordController extends Controller
         $decoded_category = ['name' => $request->category];
         
         $category = Category::where($decoded_category)->first();
-        //var_dump($category);exit;
+        
          $password = new Password();
          $password->title = $request->title;
          $password->password = $request->password;

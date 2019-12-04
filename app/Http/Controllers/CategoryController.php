@@ -47,14 +47,25 @@ class CategoryController extends Controller
 
         $user = User::where('email', '=', $user_email)->first();
 
+        $category_requested = Category::where('name', '=', $request->name)
+            ->where('user_id', '=', $user->id)
+            ->first();
+
+        if ($category_requested != NULL)
+        {
+            return response()->json([
+                "message" => 'Error, tienes una categoría con el mismo nombre creada'
+            ], 401);
+        }
+
          $category = new Category();
          $category->name = $request->name;
          $category->user_id = $user->id;
          $category->save();
 
-         return response()->json([
+        return response()->json([
             "name" => $category->name,
-         ]);
+        ], 200);
     }
 
     /**
