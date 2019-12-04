@@ -118,6 +118,7 @@ class PasswordController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $password = Password::find($id);
+        $password->delete();
     }
 }
