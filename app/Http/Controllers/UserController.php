@@ -67,8 +67,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //$user = new user();
-        //$email=$user->register($request);
+        $requested_email = ['email' => $request->email];
+        $email = user::where($requested_email)->first();
+
+        if ($email != NULL)
+        {
+            return response()->json([
+                "message" => 'Este email ya esta registrado'
+            ], 401);
+        }
 
         $user = new User();
         $user->name = $request->name;
