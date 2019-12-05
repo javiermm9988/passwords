@@ -121,4 +121,20 @@ class PasswordController extends Controller
         $password = Password::find($id);
         $password->delete();
     }
+
+    public function show_passwords(Request $request)
+    {
+        $request_token = $request->header('Authorization');
+        $token = new token();
+        $decoded_token = $token->decode($request_token);
+
+        $user_email = $decoded_token->email;
+        $user = User::where('email', '=', $user_email)->first();
+
+
+        return response()->json([
+            $user->passwords
+        ], 200);
+        
+    }
 }
